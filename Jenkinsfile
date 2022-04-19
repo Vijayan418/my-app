@@ -15,13 +15,13 @@ node{
 	        }
 	    }*/
    stage('Build Docker Imager'){
-   sh 'docker build -t Vijayan418/myweb:0.0.2 .'
+   sh 'docker build -t vijayan418/myweb:0.0.2 .'
    }
    stage('Docker Image Push'){
    withCredentials([string(credentialsId: 'dockerPass', variable: 'dockerPassword')]) {
-   sh "docker login -u Vijayan418 -p ${dockerPassword}"
+   sh "docker login -u vijayan418 -p ${dockerPassword}"
     }
-   sh 'docker push Vijayan418/myweb:0.0.2'
+   sh 'docker push vijayan418/myweb:0.0.2'
    }
    stage('Remove Previous Container'){
 	try{
@@ -30,7 +30,7 @@ node{
 		//  do nothing if there is an exception
 	}
    stage('Docker deployment'){
-   sh 'docker run -d -p 8090:8080 --name tomcattest Vijayan418/myweb:0.0.2' 
+   sh 'docker run -d -p 8090:8080 --name tomcattest vijayan418/myweb:0.0.2' 
    }
 }
 }
